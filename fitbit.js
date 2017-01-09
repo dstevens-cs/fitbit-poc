@@ -70,7 +70,7 @@ function drawChart(data) {
             pointStrokeColor:     '#fff',
             pointHighlightFill:   '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
-            data:   data[0].map(function(step, i) {return i})
+            data:   data.map(function(step, i) {return i})
         }]
     }
 
@@ -80,6 +80,8 @@ function drawChart(data) {
 function drawList(data) {
     var list = document.createElement('ul');
     data.map(function(step, i) {
+        console.log("step: " + step);
+        console.log("i: " + i);
         var listItem = document.createElement('li');
         listItem.innerHTML = i.time + ": " + i.value;
         list.appendChild(listItem);
