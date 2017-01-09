@@ -70,7 +70,7 @@ function drawChart(data) {
             pointStrokeColor:     '#fff',
             pointHighlightFill:   '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
-            data:   data
+            data:   data.map(function(step, i) {return i})
         }]
     }
 
