@@ -31,7 +31,7 @@ function showUser(authToken) {
             header.innerHTML = data.user.fullName;
 
             var profilePic = document.createElement('img');
-            profilePic.src = data["user"].avatar;
+            profilePic.src = data.user.avatar;
             elem('user').appendChild(header);
             elem('user').appendChild(profilePic);
         })
@@ -44,8 +44,13 @@ function getIntradayActivity(authToken) {
             var header = document.createElement('h3');
             header.innerHTML = 'Steps';
 
+            drawChart(data["activities-steps-intraday"].dataset);)
             elem('step-data').appendChild(header);
         })
+}
+
+function drawChart(data) {
+    console.log("Chart data: " + JSON.stringify(data));
 }
 
 function fetchData(url, authToken) {
