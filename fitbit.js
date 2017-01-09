@@ -13,7 +13,7 @@ function onLoad() {
     var loginDiv = document.getElementById('login');
     loginDiv.style.display = 'hidden';
 
-    var userDiv = document.getElementyById('user');
+    var userDiv = document.getElementById('user');
     userDiv.style.display = 'block';
 
     showUser(authToken);
