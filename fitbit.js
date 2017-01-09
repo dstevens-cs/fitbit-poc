@@ -28,10 +28,10 @@ function showUser(authToken) {
         .then(function(data) {
             console.log("user: " + JSON.stringify(data));
             var header = document.createElement('h3');
-            header.innerHTML = data.fullName;
+            header.innerHTML = data.user.fullName;
 
             var profilePic = document.createElement('img');
-            profilePic.src = data.avatar;
+            profilePic.src = data["user"].avatar;
             elem('user').appendChild(header);
             elem('user').appendChild(profilePic);
         })
