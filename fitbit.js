@@ -44,7 +44,7 @@ function getIntradayActivity(authToken) {
             var header = document.createElement('h3');
             header.innerHTML = 'Steps';
 
-            drawChart(data["activities-steps-intraday"].dataset);)
+            drawChart(data["activities-steps-intraday"].dataset);
             elem('step-data').appendChild(header);
         })
 }
