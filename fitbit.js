@@ -7,7 +7,7 @@ function onLoad() {
     }
 
     var endIndex = url.indexOf("&");
-    var authToken = url.substring(index + 1, endIndex - 1);
+    var authToken = url.substring(index + 15, endIndex - 1);
     console.log("AuthToken: " + authToken);
 
     var loginDiv = document.getElementById('login');
@@ -20,7 +20,7 @@ function onLoad() {
 }
 
 function showUser(authToken) {
-    fetchData('https://api.fitbit.com/1/user/-/profile.json', authtoken)
+    fetchData('https://api.fitbit.com/1/user/-/profile.json', authToken)
         .then(function(data) {
             var header = document.createElement('h3');
             header.innerHTML = 'User';
