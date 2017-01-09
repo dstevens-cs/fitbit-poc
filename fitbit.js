@@ -43,4 +43,4 @@ function fetchData(url, authToken) {
     })
 }
 
-function elem(id) { return document.getElementyById(id) }
+function elem(id) { return document.getElementById(id) }
