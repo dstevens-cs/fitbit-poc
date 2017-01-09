@@ -42,7 +42,7 @@ function getIntradayActivity(authToken) {
         .then(function(data) {
             console.log("steps: " + JSON.stringify(data));
             var header = document.createElement('h3');
-            header.innerHTML = 'Steps on ' + data["activities-steps"].dateTime + ": " + data["activities-steps"].value;
+            header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
 
             drawList(data["activities-steps-intraday"].dataset);
             drawChart(data["activities-steps-intraday"].dataset);
@@ -61,7 +61,7 @@ function drawChart(data) {
     ctx.canvas.height = Math.floor(window.innertHeight * .8);
 
     var chartData = {
-        labels: data.map(function(step, i) {return i}),
+        labels: data[0].map(function(step, i) {return i}),
         datasets: [{
             label: 'Steps',
             fillColor:            'rgba(220,220,220,0.2)',
@@ -70,7 +70,7 @@ function drawChart(data) {
             pointStrokeColor:     '#fff',
             pointHighlightFill:   '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
-            data:   data.map(function(step, i) {return i})
+            data:   data[0].map(function(step, i) {return i})
         }]
     }
 
@@ -79,7 +79,7 @@ function drawChart(data) {
 
 function drawList(data) {
     var list = document.createElement('ul');
-    data.map(function(step, i) {
+    data[0].map(function(step, i) {
         var listItem = document.createElement('li');
         listItem.innerHTML = i.time + ": " + i.value;
         list.appendChild(listItem);
