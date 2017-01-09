@@ -104,7 +104,7 @@ function fetchData(url, authToken) {
 function getDate() {
     var todaysDate = new Date();
     var year = todaysDate.getFullYear().toString();
-    var month = todaysDate.getMonth()+1).toString();
+    var month = (todaysDate.getMonth()+1).toString();
     var day = todaysDate.getDate().toString();
 
     var mmChars = mm.split('');
