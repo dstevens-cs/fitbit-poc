@@ -35,7 +35,9 @@ function showUser(authToken) {
 }
 
 function getIntradayActivity(authToken) {
-    fetchData('https://api.fitbit.com/1/user/-/activities/steps/date/2017-01-07/1d.json', authToken)
+    var date = getDate();
+    var url = 'https://api.fitbit.com/1/user/-/activities/steps/date/' + date + '/1d.json';
+    fetchData(url, authToken)
         .then(function(data) {
             var header = document.createElement('h3');
             header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
@@ -97,6 +99,18 @@ function fetchData(url, authToken) {
         req.onerror = function() { reject(new Error('Network failure'))}
         req.send()
     })
+}
+
+function getDate() {
+    var todaysDate = new Date();
+    var year = todaysDate.getFullYear().toString();
+    var month = todaysDate.getMonth()+1).toString();
+    var day = todaysDate.getDate().toString();
+
+    var mmChars = mm.split('');
+    var ddChars = dd.split('');
+
+    return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
 }
 
 function elem(id) { return document.getElementById(id) }
