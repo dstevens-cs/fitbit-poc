@@ -61,7 +61,7 @@ function drawChart(data) {
     ctx.canvas.height = Math.floor(window.innertHeight * .8);
 
     var chartData = {
-        labels: data.map(function(obj) {return obj.key},
+        labels: data.map(function(obj) {return obj.key}),
         datasets: [{
             label: 'Steps',
             fillColor:            'rgba(220,220,220,0.2)',
