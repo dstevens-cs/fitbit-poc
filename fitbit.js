@@ -6,7 +6,7 @@ function onLoad() {
         return;
     }
 
-    var endIndex = url.firstIndexOf("&");
+    var endIndex = url.IndexOf("&");
     var authToken = url.subString(index + 1, endIndex - 1);
     console.log("AuthToken: " + authToken);
 
