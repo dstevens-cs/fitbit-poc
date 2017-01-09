@@ -10,23 +10,40 @@ function onLoad() {
     var authToken = url.substring(index + 14, endIndex);
     console.log("AuthToken: " + authToken);
 
-    var loginDiv = document.getElementById('login');
-    loginDiv.style.display = 'hidden';
+    var loginDiv = elem('login');
+    loginDiv.style.display = 'none';
 
-    var userDiv = document.getElementById('user');
+    var userDiv = elem('user');
     userDiv.style.display = 'block';
 
+    var stepsDiv = elem('step-data');
+    stepsDiv.style.display = 'block';
+
     showUser(authToken);
+    getIntradayActivity(authToken);
 }
 
 function showUser(authToken) {
     fetchData('https://api.fitbit.com/1/user/-/profile.json', authToken)
         .then(function(data) {
+            var header = document.createElement('h3');
+            header.innerHTML = data.fullName;
+
+            var profilePic = document.createElement('img');
+            profilePic.src = data.avatar;
+            elem('user').appendChild(header);
+            elem('user').appendChild(profilePic);
+        })
+}
+
+function getIntradayActivity(authToken) {
+    fetchData('https://api.fitbit.com/1/user/-/activities/steps/date/2017-01-01/7d/15min', authToken)
+        .then(function(data) {
             console.log(data);
             var header = document.createElement('h3');
-            header.innerHTML = 'User';
+            header.innerHTML = 'Steps';
 
-            elem('user').appendChild(header);
+            elem('step-data').appendChild(header);
         })
 }
 
