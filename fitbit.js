@@ -61,7 +61,7 @@ function drawChart(data) {
     ctx.canvas.height = Math.floor(window.innertHeight * .8);
 
     var chartData = {
-        labels: data[0].map(function(step, i) {return i}),
+        labels: data.map(function(step, i) {return i}),
         datasets: [{
             label: 'Steps',
             fillColor:            'rgba(220,220,220,0.2)',
@@ -79,7 +79,7 @@ function drawChart(data) {
 
 function drawList(data) {
     var list = document.createElement('ul');
-    data[0].map(function(step, i) {
+    data.map(function(step, i) {
         var listItem = document.createElement('li');
         listItem.innerHTML = i.time + ": " + i.value;
         list.appendChild(listItem);
