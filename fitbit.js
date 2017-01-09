@@ -42,15 +42,15 @@ function getIntradayActivity(authToken) {
         .then(function(data) {
             console.log("steps: " + JSON.stringify(data));
             var header = document.createElement('h3');
-            header.innerHTML = 'Steps';
+            header.innerHTML = 'Steps on ' + data["activities-steps"].dateTime + ": " + data["activities-steps"].value;
 
+            drawList(data["activities-steps-intraday"].dataset);
             drawChart(data["activities-steps-intraday"].dataset);
             elem('step-data').appendChild(header);
         })
 }
 
 function drawChart(data) {
-    console.log("Chart data: " + JSON.stringify(data));
     elem('chart').innerHTML = '';
 
     var canvas = document.createElement('canvas');
@@ -74,9 +74,18 @@ function drawChart(data) {
         }]
     }
 
-    console.log(chartData);
-
     var lineChart = new Chart(ctx).Line(data, {});
+}
+
+function drawList(data) {
+    var list = document.createElement('ul');
+    data.map(function(step, i) {
+        var listItem = document.createElement('li');
+        listItem.innerHTML = i.time + ": " + i.value;
+        list.appendChild(listItem);
+    })
+
+    elem('step-data').appendChild(list);
 }
 
 function fetchData(url, authToken) {
