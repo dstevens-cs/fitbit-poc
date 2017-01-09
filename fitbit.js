@@ -7,7 +7,7 @@ function onLoad() {
     }
 
     var endIndex = url.indexOf("&");
-    var authToken = url.subString(index + 1, endIndex - 1);
+    var authToken = url.substring(index + 1, endIndex - 1);
     console.log("AuthToken: " + authToken);
 
     var loginDiv = document.getElementById('login');
