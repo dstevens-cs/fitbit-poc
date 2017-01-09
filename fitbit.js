@@ -80,6 +80,7 @@ function drawChart(data) {
 function drawList(data) {
     var list = document.createElement('ul');
     data.map(function(obj) {
+        console.log("obj: " + JSON.stringify(obj));
         var listItem = document.createElement('li');
         listItem.innerHTML = obj.key + ": " + obj.value;
         list.appendChild(listItem);
