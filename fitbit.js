@@ -1,6 +1,5 @@
 function onLoad() {
     var url = window.location.href;
-    console.log("URL: " + url);
     var index = url.lastIndexOf("#");
     if (index === -1) {
         return;
@@ -8,7 +7,6 @@ function onLoad() {
 
     var endIndex = url.indexOf("&");
     var authToken = url.substring(index + 14, endIndex);
-    console.log("AuthToken: " + authToken);
 
     var loginDiv = elem('login');
     loginDiv.style.display = 'none';
@@ -26,7 +24,6 @@ function onLoad() {
 function showUser(authToken) {
     fetchData('https://api.fitbit.com/1/user/-/profile.json', authToken)
         .then(function(data) {
-            console.log("user: " + JSON.stringify(data));
             var header = document.createElement('h3');
             header.innerHTML = data.user.fullName;
 
@@ -40,13 +37,12 @@ function showUser(authToken) {
 function getIntradayActivity(authToken) {
     fetchData('https://api.fitbit.com/1/user/-/activities/steps/date/2017-01-07/1d.json', authToken)
         .then(function(data) {
-            console.log("steps: " + JSON.stringify(data));
             var header = document.createElement('h3');
             header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
 
+            elem('step-data').appendChild(header);
             drawList(data["activities-steps-intraday"].dataset);
             drawChart(data["activities-steps-intraday"].dataset);
-            elem('step-data').appendChild(header);
         })
 }
 
@@ -80,9 +76,8 @@ function drawChart(data) {
 function drawList(data) {
     var list = document.createElement('ul');
     data.map(function(obj) {
-        console.log("obj: " + JSON.stringify(obj));
         var listItem = document.createElement('li');
-        listItem.innerHTML = obj.key + ": " + obj.value;
+        listItem.innerHTML = obj.time + ": " + obj.value;
         list.appendChild(listItem);
     })
 
