@@ -107,8 +107,8 @@ function getDate() {
     var month = (todaysDate.getMonth()+1).toString();
     var day = todaysDate.getDate().toString();
 
-    var mmChars = mm.split('');
-    var ddChars = dd.split('');
+    var mmChars = month.split('');
+    var ddChars = day.split('');
 
     return year + '-' + (mmChars[1]?month:"0"+mmChars[0]) + '-' + (ddChars[1]?day:"0"+ddChars[0]);
 }
