@@ -7,7 +7,7 @@ function onLoad() {
     }
 
     var endIndex = url.indexOf("&");
-    var authToken = url.substring(index + 15, endIndex - 1);
+    var authToken = url.substring(index + 14, endIndex);
     console.log("AuthToken: " + authToken);
 
     var loginDiv = document.getElementById('login');
@@ -35,7 +35,7 @@ function fetchData(url, authToken) {
     return new Promise(function(resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('GET', url, true);
-        req.setRequestHeader("Authorization", authHeader)
+        req.setRequestHeader("Authorization", authHeader);
         req.onload = function() {
             if (req.status >= 200 && req.status < 300) return resolve(JSON.parse(req.response))
             reject(new Error(req.statusText))
