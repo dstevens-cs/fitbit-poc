@@ -26,6 +26,7 @@ function onLoad() {
 function showUser(authToken) {
     fetchData('https://api.fitbit.com/1/user/-/profile.json', authToken)
         .then(function(data) {
+            console.log("user: " + data);
             var header = document.createElement('h3');
             header.innerHTML = data.fullName;
 
@@ -37,9 +38,9 @@ function showUser(authToken) {
 }
 
 function getIntradayActivity(authToken) {
-    fetchData('https://api.fitbit.com/1/user/-/activities/steps/date/2017-01-01/7d/15min', authToken)
+    fetchData('https://api.fitbit.com/1/user/-/activities/steps/date/2017-01-07/1d/15min', authToken)
         .then(function(data) {
-            console.log(data);
+            console.log("steps: " + data);
             var header = document.createElement('h3');
             header.innerHTML = 'Steps';
 
