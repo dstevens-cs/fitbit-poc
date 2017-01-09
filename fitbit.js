@@ -61,7 +61,7 @@ function drawChart(data) {
     ctx.canvas.height = Math.floor(window.innertHeight * .8);
 
     var chartData = {
-        labels: data.map(function(step, i) {return i}),
+        labels: data.map(function(obj) {return obj.key},
         datasets: [{
             label: 'Steps',
             fillColor:            'rgba(220,220,220,0.2)',
@@ -70,7 +70,7 @@ function drawChart(data) {
             pointStrokeColor:     '#fff',
             pointHighlightFill:   '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
-            data:   data.map(function(step, i) {return i})
+            data:   data.map(function(obj) {obj.value})
         }]
     }
 
@@ -79,11 +79,9 @@ function drawChart(data) {
 
 function drawList(data) {
     var list = document.createElement('ul');
-    data.map(function(step, i) {
-        console.log("step: " + step);
-        console.log("i: " + i);
+    data.map(function(obj) {
         var listItem = document.createElement('li');
-        listItem.innerHTML = i.time + ": " + i.value;
+        listItem.innerHTML = obj.key + ": " + obj.value;
         list.appendChild(listItem);
     })
 
