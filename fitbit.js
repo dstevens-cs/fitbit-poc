@@ -110,7 +110,7 @@ function getDate() {
     var mmChars = mm.split('');
     var ddChars = dd.split('');
 
-    return yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
+    return year + '-' + (mmChars[1]?month:"0"+mmChars[0]) + '-' + (ddChars[1]?day:"0"+ddChars[0]);
 }
 
 function elem(id) { return document.getElementById(id) }
