@@ -51,6 +51,32 @@ function getIntradayActivity(authToken) {
 
 function drawChart(data) {
     console.log("Chart data: " + JSON.stringify(data));
+    elem('chart').innerHTML = '';
+
+    var canvas = document.createElement('canvas');
+    elem('chart').appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    ctx.canvas.width = Math.floor(window.innerWidth * .75);
+    ctx.canvas.height = Math.floor(window.innertHeight * .8);
+
+    var chartData = {
+        labels: data.map(function(step, i) {return i}),
+        datasets: [{
+            label: 'Steps',
+            fillColor:            'rgba(220,220,220,0.2)',
+            strokeColor:          'rgba(220,220,220,1)',
+            pointColor:           'rgba(220,220,220,1)',
+            pointStrokeColor:     '#fff',
+            pointHighlightFill:   '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data:   data
+        }]
+    }
+
+    console.log(chartData);
+
+    var lineChart = new Chart(ctx).Line(data, {});
 }
 
 function fetchData(url, authToken) {
