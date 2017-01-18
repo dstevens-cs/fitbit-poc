@@ -14,9 +14,6 @@ function onLoad() {
     var userDiv = elem('user');
     userDiv.style.display = 'block';
 
-    var stepsDiv = elem('step-data');
-    stepsDiv.style.display = 'block';
-
     showUser(authToken);
     getIntradayActivity(authToken);
 }
