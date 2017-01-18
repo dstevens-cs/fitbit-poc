@@ -39,8 +39,6 @@ function showData(authToken) {
                             }
                         }
                     }
-
-                    console.log("data: " + JSON.stringify(data));
                     
                     drawTable(data);
                 })
@@ -101,7 +99,6 @@ function drawTable(data) {
     }
 
     elem('fitbit-data').appendChild(table);
-    table.tableExport();
 }
 
 function fetchData(url, authToken) {
