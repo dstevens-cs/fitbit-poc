@@ -25,7 +25,9 @@
             var tables = document.getElementsByTagName('table');
             var table = tables[0];
             console.log(table);
-            table.tableExport();    
+            if (table != undefined) {
+                table.tableExport();
+            }   
         }
 
         window.onload = tableExportInit
