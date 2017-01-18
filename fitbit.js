@@ -43,8 +43,8 @@ function getIntradayActivity(authToken) {
             header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
 
             elem('step-data').appendChild(header);
-            drawList(data["activities-steps-intraday"].dataset);
-            drawChart(data["activities-steps-intraday"].dataset);
+            drawTable(data["activities-steps-intraday"].dataset);
+            //drawChart(data["activities-steps-intraday"].dataset);
         })
 }
 
@@ -75,15 +75,37 @@ function drawChart(data) {
     var lineChart = new Chart(ctx).Line(data, {});
 }
 
-function drawList(data) {
-    var list = document.createElement('ul');
+function drawTable(data) {
+    var table = document.createElement('table');
+    var tableHeader = document.createElement('tr');
+    var timeHeader = document.createElement('th');
+    timeHeader.innerHTML = 'Time';
+    tableHeader.appendChild(timeHeader);
+
+    var stepsHeader = document.createElement('th');
+    stepsHeader.innerHTML = 'Steps';
+    tableHeader.appendChild(stepsHeader);
+
+    var hrHeader = document.createElement('th');
+    hrHeader.innerHTML = 'Heartrate';
+    tableHeader.appendChild(hrHeader);
+
+    table.appendChild(tableHeader);
+
     data.map(function(obj) {
-        var listItem = document.createElement('li');
-        listItem.innerHTML = obj.time + ": " + obj.value;
-        list.appendChild(listItem);
+        var tableRow = document.createElement('tr');
+        var timeCell = document.createElement('td');
+        timeCell.innerHTML = obj.time;
+        tableRow.appendChild(timeCell);
+
+        var stepCell = document.createElement('td');
+        stepCell.innerHTML = obj.value;
+        tableRow.appendChild(stepCell);
+
+        table.appendChild(tableRow);
     })
 
-    elem('step-data').appendChild(list);
+    elem('fitbit-data').appendChild(table);
 }
 
 function fetchData(url, authToken) {
