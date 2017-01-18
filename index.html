@@ -18,7 +18,7 @@
         <div id="fitbit-data">
             <table id="data-table">
             </table>
-            <button onclick="window.open('data:application/vnd.ms-excel,' + encodeURIComponent(document.getElementById('data-table').outerHTM‌​L));">Export</button>
+            <button onclick="window.open('data:application/vnd.ms-excel,' + document.getElementById('data-table').outerHTML.replace(/ /g, '%20'));">Export</button>
         </div>
 
         <div id="chart"></div>
