@@ -98,7 +98,7 @@ function drawTable(data) {
         tableRow.appendChild(hrCell);
 
         table.appendChild(tableRow);
-    })
+    }
 
     elem('fitbit-data').appendChild(table);
 }
