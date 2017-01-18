@@ -86,15 +86,15 @@ function drawTable(data) {
     for(var obj in data) {
         var tableRow = document.createElement('tr');
         var timeCell = document.createElement('td');
-        timeCell.innerHTML = obj.time;
+        timeCell.innerHTML = data[obj].time;
         tableRow.appendChild(timeCell);
 
         var stepCell = document.createElement('td');
-        stepCell.innerHTML = obj.value;
+        stepCell.innerHTML = data[obj].value;
         tableRow.appendChild(stepCell);
 
         var hrCell = document.createElement('td');
-        hrCell.innerHTML = obj.hr;
+        hrCell.innerHTML = data[obj].hr;
         tableRow.appendChild(hrCell);
 
         table.appendChild(tableRow);
