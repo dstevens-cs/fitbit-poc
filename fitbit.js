@@ -15,9 +15,9 @@ function onLoad() {
     userDiv.style.display = 'block';
 
     showUser(authToken);
-    var stepData = getIntradayData(authToken, 'steps');
+    var stepData = await getIntradayData(authToken, 'steps');
     console.log("onLoad: " + JSON.stringify(stepData));
-    var hrData = getIntradayData(authToken, 'heart');
+    var hrData =  await getIntradayData(authToken, 'heart');
 
     var header = document.createElement('h3');
     header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
