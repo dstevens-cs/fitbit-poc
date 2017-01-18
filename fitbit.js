@@ -37,7 +37,7 @@ function showData(authToken) {
                         }
                     }
 
-                    console.log(JSON.stringify(data));
+                    console.log("data: " + JSON.stringify(data));
                     
                     drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
                 })
