@@ -16,14 +16,6 @@ function onLoad() {
 
     showUser(authToken);
     showData(authToken);
-
-    // var header = document.createElement('h3');
-    // header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
-    // elem('fitbit-data').appendChild(header);
-    //
-    // drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
-    //drawChart(data["activities-steps-intraday"].dataset);
-
 }
 
 function showData(authToken) {
@@ -31,8 +23,11 @@ function showData(authToken) {
         .then(function(stepData) {
             getIntradayData(authToken, 'heart')
                 .then(function(hrData) {
-                    console.log("stepData: " + JSON.stringify(stepData));
-                    console.log("hrData: " + JSON.stringify(hrData));
+                    var header = document.createElement('h3');
+                    header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
+                    elem('fitbit-data').appendChild(header);
+
+                    drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
                 })
         })
 }
@@ -54,33 +49,6 @@ function getIntradayData(authToken, endpoint) {
     //var date = getDate();
     var url = 'https://api.fitbit.com/1/user/-/activities/' + endpoint + '/date/today/1d.json';
     return fetchData(url, authToken)
-}
-
-function drawChart(data) {
-    elem('chart').innerHTML = '';
-
-    var canvas = document.createElement('canvas');
-    elem('chart').appendChild(canvas);
-
-    var ctx = canvas.getContext('2d');
-    ctx.canvas.width = Math.floor(window.innerWidth * .75);
-    ctx.canvas.height = Math.floor(window.innertHeight * .8);
-
-    var chartData = {
-        labels: data.map(function(obj) {return obj.key}),
-        datasets: [{
-            label: 'Steps',
-            fillColor:            'rgba(220,220,220,0.2)',
-            strokeColor:          'rgba(220,220,220,1)',
-            pointColor:           'rgba(220,220,220,1)',
-            pointStrokeColor:     '#fff',
-            pointHighlightFill:   '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data:   data.map(function(obj) {obj.value})
-        }]
-    }
-
-    var lineChart = new Chart(ctx).Line(data, {});
 }
 
 function drawTable(stepData, hrData) {
@@ -133,18 +101,6 @@ function fetchData(url, authToken) {
         req.onerror = function() { reject(new Error('Network failure'))}
         req.send()
     })
-}
-
-function getDate() {
-    var todaysDate = new Date();
-    var year = todaysDate.getFullYear().toString();
-    var month = (todaysDate.getMonth()+1).toString();
-    var day = todaysDate.getDate().toString();
-
-    var mmChars = month.split('');
-    var ddChars = day.split('');
-
-    return year + '-' + (mmChars[1]?month:"0"+mmChars[0]) + '-' + (ddChars[1]?day:"0"+ddChars[0]);
 }
 
 function elem(id) { return document.getElementById(id) }
