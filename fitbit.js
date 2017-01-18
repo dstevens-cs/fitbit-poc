@@ -65,7 +65,7 @@ function getIntradayData(authToken, endpoint) {
 }
 
 function drawTable(data) {
-    var table = document.createElement('table');
+    var table = document.getElementById('data-table');
     var tableHeader = document.createElement('tr');
     var timeHeader = document.createElement('th');
     timeHeader.innerHTML = 'Time';
