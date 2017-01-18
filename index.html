@@ -21,7 +21,9 @@
         <div id="chart"></div>
     </body>
     <script type="text/javascript">
-        var table = document.getElementsByTagName('table')[0];
+        var tables = document.getElementsByTagName('table');
+        var table = tables[0];
+        console.log(table);
         table.tableExport();
     </script>
 </html>
