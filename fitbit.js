@@ -79,7 +79,12 @@ function drawTable(stepData, hrData) {
         tableRow.appendChild(stepCell);
 
         var hrCell = document.createElement('td');
-        hrCell.innerHTML = hrData[obj.time].value;
+        var hr = hrData[obj.key];
+        if (hr == null) {
+            hrCell.innerHTML = 'N/A'
+        } else {
+            hrCell.innerHTML = hr.value;
+        }
         tableRow.appendChild(hrCell);
 
         table.appendChild(tableRow);
