@@ -101,6 +101,7 @@ function drawTable(data) {
     }
 
     elem('fitbit-data').appendChild(table);
+    table.tableExport();
 }
 
 function fetchData(url, authToken) {
