@@ -15,8 +15,8 @@ function onLoad() {
     userDiv.style.display = 'block';
 
     showUser(authToken);
-    var stepData = getIntradayActivity(authToken, 'steps');
-    var hrData = getIntradayActivity(authToken, 'heart');
+    var stepData = getIntradayData(authToken, 'steps');
+    var hrData = getIntradayData(authToken, 'heart');
 
     var header = document.createElement('h3');
     header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
@@ -40,7 +40,7 @@ function showUser(authToken) {
         })
 }
 
-function getIntradayActivityData(authToken, endpoint) {
+function getIntradayData(authToken, endpoint) {
     //var date = getDate();
     var url = 'https://api.fitbit.com/1/user/-/activities/' + endpoint + '/date/today/1d.json';
     fetchData(url, authToken)
