@@ -16,7 +16,7 @@ function onLoad() {
 
     showUser(authToken);
     var stepData = getIntradayData(authToken, 'steps');
-    console.log("onLoad: " + stepData);
+    console.log("onLoad: " + JSON.stringify(stepData));
     var hrData = getIntradayData(authToken, 'heart');
 
     var header = document.createElement('h3');
@@ -46,7 +46,7 @@ function getIntradayData(authToken, endpoint) {
     var url = 'https://api.fitbit.com/1/user/-/activities/' + endpoint + '/date/today/1d.json';
     fetchData(url, authToken)
         .then(function(data) {
-            console.log("getIntraDay function: " + data);
+            console.log("getIntraDay function: " + JSON.stringify(data));
             return data;
         })
 }
@@ -122,7 +122,6 @@ function fetchData(url, authToken) {
         req.open('GET', url, true);
         req.setRequestHeader("Authorization", authHeader);
         req.onload = function() {
-            console.log("fetchData: " + JSON.parse(req.response))
             if (req.status >= 200 && req.status < 300) return resolve(JSON.parse(req.response))
             reject(new Error(req.statusText))
         }
