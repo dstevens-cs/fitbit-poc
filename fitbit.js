@@ -28,8 +28,15 @@ function showData(authToken) {
                     elem('fitbit-data').appendChild(header);
 
                     var data = {};
-                    for(var obj in stepData["activities-steps-intraday"].dataset) { data[obj] = stepData["activities-steps-intraday"].dataset[obj]; }
-                    for(var obj in hrData["activities-heart-intraday"].dataset) { data[obj] = hrData["activities-heart-intraday"].dataset[obj]; }
+                    for(var stepObj in stepData["activities-steps-intraday"].dataset) { 
+                        data[stepObj] = stepData["activities-steps-intraday"].dataset[stepObj];
+                        for(var hrObj in hrData["activities-heart-intraday"].dataset) {
+                            if (hrObj.time === stepObj.time) {
+                                data[stepObj].hr = hrObj.value;
+                            } 
+                        }
+                    }
+
                     console.log(JSON.stringify(data));
                     
                     drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
