@@ -29,15 +29,13 @@ function showData(authToken) {
 
                     var data = {};
                     for(var stepObj in stepData["activities-steps-intraday"].dataset) {
-                        console.log("step obj: " + JSON.stringify(stepData["activities-steps-intraday"].dataset[stepObj])); 
                         data[stepObj] = stepData["activities-steps-intraday"].dataset[stepObj];
-                        console.log("data obj pre: " + JSON.stringify(data[stepObj]));
                         for(var hrObj in hrData["activities-heart-intraday"].dataset) {
-                            console.log("hr obj: " + JSON.stringify(hrData["activities-heart-intraday"].dataset[hrObj]));
                             if (hrData["activities-heart-intraday"].dataset[hrObj].time === stepData["activities-steps-intraday"].dataset[stepObj].time) {
                                 data[stepObj].hr = hrData["activities-heart-intraday"].dataset[hrObj].value;
-                                console.log("data obj post: " + JSON.stringify(data[stepObj]));
-                            } 
+                            } else {
+                                data[stepObj].hr = 'N/A';
+                            }
                         }
                     }
 
