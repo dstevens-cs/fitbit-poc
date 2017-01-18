@@ -15,7 +15,16 @@ function onLoad() {
     userDiv.style.display = 'block';
 
     showUser(authToken);
-    getIntradayActivity(authToken);
+    var stepData = getIntradayActivity(authToken, 'steps');
+    var hrData = getIntradayActivity(authToken, 'heart');
+
+    var header = document.createElement('h3');
+    header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
+    elem('fitbit-data').appendChild(header);
+
+    drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
+    //drawChart(data["activities-steps-intraday"].dataset);
+
 }
 
 function showUser(authToken) {
@@ -31,17 +40,12 @@ function showUser(authToken) {
         })
 }
 
-function getIntradayActivity(authToken) {
-    var date = getDate();
-    var url = 'https://api.fitbit.com/1/user/-/activities/steps/date/' + date + '/1d.json';
+function getIntradayActivityData(authToken, endpoint) {
+    //var date = getDate();
+    var url = 'https://api.fitbit.com/1/user/-/activities/' + endpoint + '/date/today/1d.json';
     fetchData(url, authToken)
         .then(function(data) {
-            var header = document.createElement('h3');
-            header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
-
-            elem('fitbit-data').appendChild(header);
-            drawTable(data["activities-steps-intraday"].dataset);
-            //drawChart(data["activities-steps-intraday"].dataset);
+            return data;
         })
 }
 
@@ -72,7 +76,7 @@ function drawChart(data) {
     var lineChart = new Chart(ctx).Line(data, {});
 }
 
-function drawTable(data) {
+function drawTable(stepData, hrData) {
     var table = document.createElement('table');
     var tableHeader = document.createElement('tr');
     var timeHeader = document.createElement('th');
@@ -89,7 +93,7 @@ function drawTable(data) {
 
     table.appendChild(tableHeader);
 
-    data.map(function(obj) {
+    stepData.map(function(obj) {
         var tableRow = document.createElement('tr');
         var timeCell = document.createElement('td');
         timeCell.innerHTML = obj.time;
@@ -98,6 +102,10 @@ function drawTable(data) {
         var stepCell = document.createElement('td');
         stepCell.innerHTML = obj.value;
         tableRow.appendChild(stepCell);
+
+        var hrCell = document.createElement('td');
+        hrCell.innerHTML = hrData[obj.time].value;
+        tableRow.appendChild(hrCell);
 
         table.appendChild(tableRow);
     })
