@@ -15,17 +15,26 @@ function onLoad() {
     userDiv.style.display = 'block';
 
     showUser(authToken);
-    var stepData = await getIntradayData(authToken, 'steps');
-    console.log("onLoad: " + JSON.stringify(stepData));
-    var hrData =  await getIntradayData(authToken, 'heart');
+    showData(authToken);
 
-    var header = document.createElement('h3');
-    header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
-    elem('fitbit-data').appendChild(header);
-
-    drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
+    // var header = document.createElement('h3');
+    // header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
+    // elem('fitbit-data').appendChild(header);
+    //
+    // drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
     //drawChart(data["activities-steps-intraday"].dataset);
 
+}
+
+function showData(authToken) {
+    getIntradayData(authToken, 'steps')
+        .then(function(stepData) {
+            getIntradayData(authToken, 'heart')
+                .then(function(hrData) {
+                    console.log("stepData: " + JSON.stringify(stepData));
+                    console.log("hrData: " + JSON.stringify(hrData));
+                })
+        })
 }
 
 function showUser(authToken) {
