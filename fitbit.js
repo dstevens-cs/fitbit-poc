@@ -33,7 +33,7 @@ function showData(authToken) {
                         for(var hrObj in hrData["activities-heart-intraday"].dataset) {
                             if (hrData["activities-heart-intraday"].dataset[hrObj].time === stepData["activities-steps-intraday"].dataset[stepObj].time) {
                                 data[stepObj].hr = hrData["activities-heart-intraday"].dataset[hrObj].value;
-                                continue;
+                                break;
                             } else {
                                 data[stepObj].hr = 'N/A';
                             }
@@ -83,7 +83,7 @@ function drawTable(data) {
 
     table.appendChild(tableHeader);
 
-    data.map(function(obj) {
+    for(var obj in data) {
         var tableRow = document.createElement('tr');
         var timeCell = document.createElement('td');
         timeCell.innerHTML = obj.time;
