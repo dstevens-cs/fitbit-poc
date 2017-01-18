@@ -29,14 +29,14 @@ function showData(authToken) {
 
                     var data = {};
                     for(var stepObj in stepData["activities-steps-intraday"].dataset) {
-                        console.log("step obj: " + stepObj); 
+                        console.log("step obj: " + JSON.stringify(stepObj)); 
                         data[stepObj] = stepData["activities-steps-intraday"].dataset[stepObj];
-                        console.log("data obj pre: " + data[stepObj]);
+                        console.log("data obj pre: " + JSON.stringify(data[stepObj]));
                         for(var hrObj in hrData["activities-heart-intraday"].dataset) {
-                            console.log("hr obj: " + hrObj);
+                            console.log("hr obj: " + JSON.stringify(hrObj));
                             if (hrObj.time === stepObj.time) {
                                 data[stepObj].hr = hrObj.value;
-                                console.log("data obj post: " + data[stepObj]);
+                                console.log("data obj post: " + JSON.stringify(data[stepObj]));
                             } 
                         }
                     }
