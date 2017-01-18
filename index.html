@@ -21,9 +21,14 @@
         <div id="chart"></div>
     </body>
     <script type="text/javascript">
-        var tables = document.getElementsByTagName('table');
-        var table = tables[0];
-        console.log(table);
-        table.tableExport();
+        function tableExportInit() {
+            var tables = document.getElementsByTagName('table');
+            var table = tables[0];
+            console.log(table);
+            table.tableExport();    
+        }
+
+        window.onload = tableExportInit
+        
     </script>
 </html>
