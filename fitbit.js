@@ -53,11 +53,7 @@ function showUser(authToken) {
 function getIntradayData(authToken, endpoint) {
     //var date = getDate();
     var url = 'https://api.fitbit.com/1/user/-/activities/' + endpoint + '/date/today/1d.json';
-    fetchData(url, authToken)
-        .then(function(data) {
-            console.log("getIntraDay function: " + JSON.stringify(data));
-            return data;
-        })
+    return fetchData(url, authToken)
 }
 
 function drawChart(data) {
