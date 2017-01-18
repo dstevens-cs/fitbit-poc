@@ -27,8 +27,11 @@ function showData(authToken) {
                     header.innerHTML = 'Steps on ' + stepData["activities-steps"][0].dateTime + ": " + stepData["activities-steps"][0].value;
                     elem('fitbit-data').appendChild(header);
 
-                    console.log(JSON.stringify(stepData));
-                    console.log(JSON.stringify(hrData));
+                    var data = {};
+                    for(var obj in stepData) { data[obj] = stepData[obj]; }
+                    for(var obj in hrData) { data[obj] = hrData[obj]; }
+                    console.log(JSON.stringify(data));
+                    
                     drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
                 })
         })
