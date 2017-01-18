@@ -39,7 +39,7 @@ function getIntradayActivity(authToken) {
             var header = document.createElement('h3');
             header.innerHTML = 'Steps on ' + data["activities-steps"][0].dateTime + ": " + data["activities-steps"][0].value;
 
-            elem('step-data').appendChild(header);
+            elem('fitbit-data').appendChild(header);
             drawTable(data["activities-steps-intraday"].dataset);
             //drawChart(data["activities-steps-intraday"].dataset);
         })
