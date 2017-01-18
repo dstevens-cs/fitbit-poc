@@ -33,6 +33,7 @@ function showData(authToken) {
                         for(var hrObj in hrData["activities-heart-intraday"].dataset) {
                             if (hrData["activities-heart-intraday"].dataset[hrObj].time === stepData["activities-steps-intraday"].dataset[stepObj].time) {
                                 data[stepObj].hr = hrData["activities-heart-intraday"].dataset[hrObj].value;
+                                continue;
                             } else {
                                 data[stepObj].hr = 'N/A';
                             }
@@ -41,7 +42,7 @@ function showData(authToken) {
 
                     console.log("data: " + JSON.stringify(data));
                     
-                    drawTable(stepData["activities-steps-intraday"].dataset, hrData["activities-heart-intraday"].dataset);
+                    drawTable(data);
                 })
         })
 }
@@ -65,7 +66,7 @@ function getIntradayData(authToken, endpoint) {
     return fetchData(url, authToken)
 }
 
-function drawTable(stepData, hrData) {
+function drawTable(data) {
     var table = document.createElement('table');
     var tableHeader = document.createElement('tr');
     var timeHeader = document.createElement('th');
@@ -82,7 +83,7 @@ function drawTable(stepData, hrData) {
 
     table.appendChild(tableHeader);
 
-    stepData.map(function(obj) {
+    data.map(function(obj) {
         var tableRow = document.createElement('tr');
         var timeCell = document.createElement('td');
         timeCell.innerHTML = obj.time;
@@ -93,12 +94,7 @@ function drawTable(stepData, hrData) {
         tableRow.appendChild(stepCell);
 
         var hrCell = document.createElement('td');
-        var hr = hrData[obj.key];
-        if (hr == null) {
-            hrCell.innerHTML = 'N/A'
-        } else {
-            hrCell.innerHTML = hr.value;
-        }
+        hrCell.innerHTML = obj.hr;
         tableRow.appendChild(hrCell);
 
         table.appendChild(tableRow);
